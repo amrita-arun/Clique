@@ -2,8 +2,14 @@ import { View, Text } from 'react-native'
 import { Stack, Tabs } from 'expo-router';
 
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import { useAuth } from '../../provider/AuthProvider'
+
 
 const _layout = () => {
+    const { signOut } = useAuth()
+
   return (
     <Tabs
         screenOptions={{
@@ -47,8 +53,12 @@ const _layout = () => {
             name="profile"
             options={{
                 title: 'Profile',
-                headerShown: false,
-                
+                //headerShown: false,
+                headerRight: () => (
+                    <TouchableOpacity onPress={signOut}>
+                      <Ionicons name="log-out-outline" size={30} color={'#000'} />
+                    </TouchableOpacity>
+                ),
             }}
         />
     </Tabs>
